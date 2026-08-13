@@ -77,9 +77,6 @@ ping -c 3 ubuntu.com
 Le `ping` valide deux choses d'un coup : la route sort par la passerelle, et la résolution DNS fonctionne.
 
 > **Résultat attendu** : une seule adresse IPv4 sur l'interface, en `valid_lft forever`.
-
-![Légende](captures/01-etat-initial-dhcp.jpg)
-
 ---
 
 ## Étape 2 — Utilisateurs, groupes et droits
