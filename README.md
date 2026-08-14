@@ -123,7 +123,7 @@ Sur un répertoire, le bit d'exécution autorise à **entrer** dedans.
 
 > **Résultat attendu** : `drwxrwx--- root techs /srv/partage`
 
-![Dossier /srv/partage en 770, propriété root:techs](05-dossier-partage.png)
+![Dossier /srv/partage en 770, propriété root:techs](04-dossier-partage.png)
 
 ---
 
@@ -172,7 +172,7 @@ ssh tech1@192.168.203.50
 
 À la première connexion, le client affiche l'empreinte de la clé du serveur et demande confirmation. Cette empreinte est mémorisée : toute modification ultérieure déclenchera une alerte, ce qui protège contre l'usurpation du serveur.
 
-![Connexion SSH établie depuis Windows vers le serveur Ubuntu](04-ssh-depuis-windows.png)
+![Connexion SSH établie depuis Windows vers le serveur Ubuntu](05-ssh-depuis-windows.png)
 
 ---
 
