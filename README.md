@@ -1,4 +1,3 @@
-[procedure-serveur-ubuntu.md](https://github.com/user-attachments/files/31010393/procedure-serveur-ubuntu.md)
 # Mise en service d'un serveur Ubuntu : réseau, comptes, SSH et partage Samba
 
 **Auteur** : Hicham Benkaddouche — [LinkedIn](https://linkedin.com/in/hicham-benkaddouche)
@@ -45,6 +44,8 @@ resolvectl status | head -20
 
 Relever : le nom de l'interface, l'adresse actuelle, la passerelle (`default via`) et les serveurs DNS.
 
+![État initial : adresse obtenue en DHCP sur l'interface ens33](01-etat-initial-dhcp.png)
+
 ### Choix de l'adresse
 
 VMware distribue ses baux DHCP à partir de `.128`. On choisit une adresse **en dessous de cette plage** pour éviter tout conflit : `192.168.203.50`.
@@ -77,6 +78,9 @@ ping -c 3 ubuntu.com
 Le `ping` valide deux choses d'un coup : la route sort par la passerelle, et la résolution DNS fonctionne.
 
 > **Résultat attendu** : une seule adresse IPv4 sur l'interface, en `valid_lft forever`.
+
+![Adresse fixe 192.168.203.50 appliquée et validée](02-ip-fixe.png)
+
 ---
 
 ## Étape 2 — Utilisateurs, groupes et droits
@@ -95,6 +99,8 @@ id tech1
 ```
 
 > `adduser` est interactif : le lancer seul et répondre aux questions. Ubuntu refuse les mots de passe présents dans un dictionnaire et exige au minimum 8 caractères.
+
+![Création du groupe techs et rattachement de l'utilisateur tech1](03-groupe-techs.png)
 
 ### Dossier partagé et permissions
 
@@ -116,6 +122,8 @@ Lecture du `770` :
 Sur un répertoire, le bit d'exécution autorise à **entrer** dedans.
 
 > **Résultat attendu** : `drwxrwx--- root techs /srv/partage`
+
+![Dossier /srv/partage en 770, propriété root:techs](05-dossier-partage.png)
 
 ---
 
@@ -163,6 +171,8 @@ ssh tech1@192.168.203.50
 ```
 
 À la première connexion, le client affiche l'empreinte de la clé du serveur et demande confirmation. Cette empreinte est mémorisée : toute modification ultérieure déclenchera une alerte, ce qui protège contre l'usurpation du serveur.
+
+![Connexion SSH établie depuis Windows vers le serveur Ubuntu](04-ssh-depuis-windows.png)
 
 ---
 
@@ -234,6 +244,8 @@ sudo ls -l /srv/partage
 ```
 
 > **Résultat attendu** : `-rw-rw----+ 1 tech1 techs ... test-depuis-windows.txt`
+
+![Fichier créé depuis Windows, vérifié côté Linux avec les droits attendus](06-verification-fichier-test-depuis-linux.png)
 
 Deux observations :
 
